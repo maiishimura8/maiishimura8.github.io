@@ -1,0 +1,7 @@
+# macOS folder metadata
+.DS_Store
+**/.DS_Store
+
+# editor / OS clutter
+Thumbs.db
+*.swp

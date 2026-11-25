@@ -48,6 +48,39 @@ a.frame .photo img{transition:opacity .45s ease}a.frame:hover .photo img,a.frame
 @keyframes sway{from{transform:translateX(-60px) rotate(-14deg)}to{transform:translateX(70px) rotate(16deg)}}
 @keyframes flutter{0%{transform:rotate(0deg) scaleX(1)}50%{transform:rotate(28deg) scaleX(0.5)}100%{transform:rotate(-18deg) scaleX(1)}}
 @media (max-width:760px){.g12{grid-template-columns:1fr !important}.g12>*{grid-column:auto !important;grid-row:auto !important;margin-top:0 !important}.rail{display:none}.navlinks{gap:16px !important}}
+
+/* ---------- Phones (≤760px): desktop layout above is untouched ---------- */
+@media (max-width:760px){
+  /* compact one-row menu */
+  nav{padding:6px 18px 3px !important;flex-wrap:nowrap !important;align-items:center !important}
+  .navlinks{gap:18px !important;flex-wrap:nowrap !important;font-size:14px !important;letter-spacing:0.06em !important}
+  .navlinks a{padding:12px 0 6px !important}
+  #replay{display:none !important}
+  /* narrower side margins, bigger photos */
+  main{padding-left:20px !important;padding-right:20px !important;padding-top:48px !important}
+  .g12>.frame{width:100% !important;justify-self:stretch !important}
+  section.g12{width:auto !important;margin-left:0 !important;min-height:0 !important;row-gap:24px !important}
+  .g12>.ink{margin-bottom:56px}
+  .g12 h2{width:auto !important}
+  /* titles that fit the screen */
+  main h1{font-size:clamp(24px,7.4vw,46px) !important;letter-spacing:0.2em !important;margin-right:-0.2em !important;line-height:1.25 !important}
+  main>h2{font-size:clamp(22px,6.6vw,34px) !important;letter-spacing:0.24em !important;margin-top:96px !important;margin-bottom:36px !important}
+  main>header{margin-bottom:40px !important}
+  /* main page: Research photo back to a normal shape, room for its caption */
+  a[href="research.html"].frame .photo{height:auto !important;aspect-ratio:4 / 3}
+  a[href="research.html"].frame{margin-bottom:52px !important}
+  /* details rows on Architecture / Graphic Design: two columns */
+  section.g12[style*="repeat(4"]{grid-template-columns:1fr 1fr !important;gap:22px !important;padding-right:0 !important;margin:32px 0 40px !important;height:auto !important}
+  section.g12[style*="repeat(4"]>:first-child{grid-column:1 / -1 !important}
+  div.g12[style*="repeat(2"]{row-gap:40px !important}
+  main>div[style*="flex-direction: column"]{gap:40px !important}
+  /* short wood beams from each frame to the screen edge */
+  .frame::after{content:"";position:absolute;z-index:1;height:7px;width:200px;bottom:0;right:100%;background:url(assets/bd697d8bb2f3.jpg) 0 0/auto 180px;opacity:0.7;filter:brightness(0.42) saturate(1.15);box-shadow:0 6px 16px rgba(30,15,3,0.28),inset 0 1px 0 rgba(255,236,205,0.18);pointer-events:none}
+  .frame.fr-alt::after{right:auto;left:100%;bottom:auto;top:0}
+  /* résumé menu opens on tap */
+  .rs-menu{left:0}
+}
+.rs.open .rs-menu{opacity:1;visibility:visible;transform:none}
 </style>
 </head>
 <body>
@@ -195,15 +228,18 @@ a.frame .photo img{transition:opacity .45s ease}a.frame:hover .photo img,a.frame
 <script>
 // Shoji entrance: builds the door lattice, places 石村 / 眞愛 inside a pane, plays once per visit.
 (function () {
-  var PW = 260, PH = Math.round(260 * 1.75), KT = 7, ST = 18;
+  var MOB = window.innerWidth <= 760;
+  var PW = MOB ? 150 : 260, PH = Math.round(PW * 1.75), KT = 7, ST = MOB ? 14 : 18;
+  var DH = MOB ? Math.min(900, window.innerHeight) : 900, MID = Math.round(DH / 2);
   var doors = document.getElementById('doors');
+  if (MOB) { doors.style.height = DH + 'px'; doors.querySelectorAll('img').forEach(function (im) { im.style.height = Math.round(DH * 0.85) + 'px'; }); ['nameL', 'nameR'].forEach(function (id) { var n = document.getElementById(id); n.style.fontSize = '44px'; n.style.webkitTextStrokeWidth = '1.8px'; }); }
   var content = document.getElementById('content');
   var doorL = doors.children[0], doorR = document.getElementById('doorR');
-  var offY = ((Math.round(450 - PH / 2) % PH) + PH) % PH - PH;
+  var offY = ((Math.round(MID - PH / 2) % PH) + PH) % PH - PH;
 
   function bars(door, side) {
     var h = door.querySelector('.hb'), v = door.querySelector('.vb'), html = '';
-    for (var j = 0; offY + j * PH < 960; j++) {
+    for (var j = 0; offY + j * PH < DH + 60; j++) {
       html += '<div class="wh-mine" style="position:absolute;left:0;right:0;top:' + Math.round(offY + j * PH - KT / 2) +
         'px;height:' + KT + 'px;box-shadow:0 6px 16px rgba(25,12,2,0.34),0 -3px 12px rgba(25,12,2,0.18)"></div>';
     }
@@ -218,11 +254,11 @@ a.frame .photo img{transition:opacity .45s ease}a.frame:hover .photo img,a.frame
 
   // keep each name fully inside one pane of the middle row, in one of the two panes nearest the centre seam
   function place(el, side) {
-    var k = Math.random() < 0.5 ? 0 : 1, u = Math.random(), v = Math.random();
+    var k = MOB ? 0 : (Math.random() < 0.5 ? 0 : 1), u = Math.random(), v = Math.random();
     var half = function (i) { return i === 0 ? ST : KT / 2; };
-    var nameW = 66, nameH = 140, m = 20, rowTop = Math.round(450 - PH / 2);
+    var nameW = MOB ? 48 : 66, nameH = MOB ? 104 : 140, m = MOB ? 14 : 20, rowTop = Math.round(MID - PH / 2);
     var xLo = k * PW + half(k) + m, xHi = Math.max(xLo, (k + 1) * PW - half(k + 1) - m - nameW);
-    var yLo = Math.max(rowTop, 0) + KT / 2 + m, yHi = Math.max(yLo, Math.min(rowTop + PH, 900) - KT / 2 - m - nameH);
+    var yLo = Math.max(rowTop, 0) + KT / 2 + m, yHi = Math.max(yLo, Math.min(rowTop + PH, DH) - KT / 2 - m - nameH);
     el.style[side] = Math.round(xLo + u * (xHi - xLo)) + 'px';
     el.style.top = Math.round(yLo + v * (yHi - yLo)) + 'px';
   }
@@ -248,6 +284,23 @@ a.frame .photo img{transition:opacity .45s ease}a.frame:hover .photo img,a.frame
   try { seen = sessionStorage.getItem('mai-entrance') === '1'; sessionStorage.setItem('mai-entrance', '1'); } catch (e) {}
   if (!seen && !location.hash) show();
   else content.style.animation = 'pageIn 0.35s ease-out both';
+})();
+</script>
+<script>document.querySelectorAll('.frame').forEach(function(f,i){if(i%2)f.classList.add('fr-alt')});</script>
+<script>
+// Résumé menu: tap to open/close (hover still works on desktop)
+(function () {
+  var rs = document.querySelector('.rs'); if (!rs) return;
+  var btn = rs.querySelector('.rs-btn');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = rs.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function (e) {
+    if (!rs.contains(e.target)) { rs.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  });
 })();
 </script>
 </body>

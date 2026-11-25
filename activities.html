@@ -26,6 +26,39 @@ a{color:#22140a}a:hover{color:#6e3f18}
 @keyframes sway{from{transform:translateX(-60px) rotate(-14deg)}to{transform:translateX(70px) rotate(16deg)}}
 @keyframes flutter{0%{transform:rotate(0deg) scaleX(1)}50%{transform:rotate(28deg) scaleX(0.5)}100%{transform:rotate(-18deg) scaleX(1)}}
 @media (max-width:760px){.g12{grid-template-columns:1fr !important}.g12>*{grid-column:auto !important;grid-row:auto !important}.rail{display:none}.navlinks{gap:16px !important}}
+
+/* ---------- Phones (≤760px): desktop layout above is untouched ---------- */
+@media (max-width:760px){
+  /* compact one-row menu */
+  nav{padding:6px 18px 3px !important;flex-wrap:nowrap !important;align-items:center !important}
+  .navlinks{gap:18px !important;flex-wrap:nowrap !important;font-size:14px !important;letter-spacing:0.06em !important}
+  .navlinks a{padding:12px 0 6px !important}
+  #replay{display:none !important}
+  /* narrower side margins, bigger photos */
+  main{padding-left:20px !important;padding-right:20px !important;padding-top:48px !important}
+  .g12>.frame{width:100% !important;justify-self:stretch !important}
+  section.g12{width:auto !important;margin-left:0 !important;min-height:0 !important;row-gap:24px !important}
+  .g12>.ink{margin-bottom:56px}
+  .g12 h2{width:auto !important}
+  /* titles that fit the screen */
+  main h1{font-size:clamp(24px,7.4vw,46px) !important;letter-spacing:0.2em !important;margin-right:-0.2em !important;line-height:1.25 !important}
+  main>h2{font-size:clamp(22px,6.6vw,34px) !important;letter-spacing:0.24em !important;margin-top:96px !important;margin-bottom:36px !important}
+  main>header{margin-bottom:40px !important}
+  /* main page: Research photo back to a normal shape, room for its caption */
+  a[href="research.html"].frame .photo{height:auto !important;aspect-ratio:4 / 3}
+  a[href="research.html"].frame{margin-bottom:52px !important}
+  /* details rows on Architecture / Graphic Design: two columns */
+  section.g12[style*="repeat(4"]{grid-template-columns:1fr 1fr !important;gap:22px !important;padding-right:0 !important;margin:32px 0 40px !important;height:auto !important}
+  section.g12[style*="repeat(4"]>:first-child{grid-column:1 / -1 !important}
+  div.g12[style*="repeat(2"]{row-gap:40px !important}
+  main>div[style*="flex-direction: column"]{gap:40px !important}
+  /* short wood beams from each frame to the screen edge */
+  .frame::after{content:"";position:absolute;z-index:1;height:7px;width:200px;bottom:0;right:100%;background:url(assets/bd697d8bb2f3.jpg) 0 0/auto 180px;opacity:0.7;filter:brightness(0.42) saturate(1.15);box-shadow:0 6px 16px rgba(30,15,3,0.28),inset 0 1px 0 rgba(255,236,205,0.18);pointer-events:none}
+  .frame.fr-alt::after{right:auto;left:100%;bottom:auto;top:0}
+  /* résumé menu opens on tap */
+  .rs-menu{left:0}
+}
+.rs.open .rs-menu{opacity:1;visibility:visible;transform:none}
 </style>
 </head>
 <body>
@@ -98,5 +131,6 @@ a{color:#22140a}a:hover{color:#6e3f18}
 </main>
 </div>
 
+<script>document.querySelectorAll('.frame').forEach(function(f,i){if(i%2)f.classList.add('fr-alt')});</script>
 </body>
 </html>

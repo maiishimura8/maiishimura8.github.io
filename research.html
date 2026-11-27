@@ -59,6 +59,50 @@ a{color:#22140a}a:hover{color:#6e3f18}
   .rs-menu{left:0}
 }
 .rs.open .rs-menu{opacity:1;visibility:visible;transform:none}
+
+a.frame{display:block;text-decoration:none;color:inherit}
+.hov{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:flex-start;overflow:hidden;white-space:nowrap;background:#fff url(assets/248252a99006.webp) 0 0/900px auto;opacity:0;transition:opacity .45s ease;font-size:clamp(34px,3.6vw,56px);letter-spacing:.3em;color:#22140a;-webkit-text-stroke:.9px #22140a;text-shadow:0 0 4px rgba(34,20,10,.35);pointer-events:none}
+a.frame .photo img{transition:opacity .45s ease}a.frame:hover .photo img,a.frame:focus-visible .photo img{opacity:.6}a.frame:hover .hov,a.frame:focus-visible .hov{opacity:.55}
+.mq{display:flex;flex:none;animation:mq 26s linear infinite;animation-play-state:paused}.mq span{flex:none;padding-right:.3em}a.frame:hover .mq,a.frame:focus-visible .mq{animation-play-state:running}
+@keyframes mq{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* ---------- Phones: centred layout + one spacing scale (16 / 32 / 64px). Desktop untouched. ---------- */
+@media (max-width:760px){
+  main{padding-top:40px !important}
+  main>header{margin-bottom:40px !important}
+  main>h2{margin:64px 0 32px !important}
+  /* centre all text blocks */
+  .g12>.ink,.g12 .ink,main>header,section.ink{text-align:center !important}
+  .g12>.ink{align-items:center !important;margin-bottom:64px !important;max-width:none !important}
+  .g12>.ink:last-child{margin-bottom:0 !important}
+  .g12>.ink>a,.g12>.ink>div>a{align-self:center !important}
+  .g12 ul{list-style:none !important;padding:0 !important}
+  .g12 li{text-align:center !important}
+  /* one gap between a photo and the text that belongs to it */
+  section.g12,div.g12{row-gap:16px !important;column-gap:0 !important}
+  .g12>.frame{justify-self:center !important}
+  /* main page: intro, captions, about, contact */
+  section.g12:first-of-type{padding:24px 0 0 !important}
+  section.g12>a.cap{text-align:center !important;padding:0 !important;margin-bottom:48px !important}
+  a[href="research.html"].frame>span{left:0 !important;right:0 !important;text-align:center !important;padding-top:16px !important}
+  a[href="research.html"].frame{margin-bottom:80px !important}
+  .about>.frame{width:78% !important}
+  .contact{gap:20px !important;padding-top:32px !important}
+  .contact>a[href^="mailto"]{font-size:18px !important}
+  .soc{width:44px !important;height:44px !important}.soc img{width:28px !important;height:28px !important}
+  /* Architecture / Graphic Design: details row and galleries */
+  section.g12[style*="repeat(4"]{text-align:center !important;margin:32px 0 !important;row-gap:24px !important;column-gap:16px !important}
+  div.g12[style*="repeat(2"]{row-gap:32px !important}
+  main>div[style*="flex-direction: column"]{gap:32px !important}
+  section.g12[style*="repeat(4"]>:last-child:nth-child(even){grid-column:1 / -1 !important}
+  section.g12>a.cap:last-child{margin-bottom:0 !important}
+  /* back links + footer */
+  main>div.ink[style*="justify-content: center"]{margin-top:64px !important}
+  main>p.ink:last-child{margin-top:64px !important;padding-bottom:40px !important}
+  /* symmetric wood beams: one to each screen edge, along the frame's bottom */
+  .frame::after,.frame.fr-alt::after{right:100% !important;left:auto !important;top:auto !important;bottom:0 !important}
+  .frame::before{content:"";position:absolute;z-index:1;height:7px;width:200px;bottom:0;left:100%;background:url(assets/bd697d8bb2f3.jpg) 0 0/auto 180px;opacity:0.7;filter:brightness(0.42) saturate(1.15);box-shadow:0 6px 16px rgba(30,15,3,0.28),inset 0 1px 0 rgba(255,236,205,0.18);pointer-events:none}
+}
 </style>
 </head>
 <body>
@@ -91,15 +135,15 @@ a{color:#22140a}a:hover{color:#6e3f18}
 
 </header>
 <section class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 40px; row-gap: 112px">
-<div class="frame rv" style="grid-column: 1 / span 7; grid-row: 1">
+<a href="https://cscl.yale.edu/" target="_blank" rel="noopener noreferrer" class="frame rv lab" aria-label="Visit the Computational Social Cognition Lab website (opens in a new tab)" style="grid-column: 1 / span 7; grid-row: 1">
 <div class="rail wh" style="right: 100%; bottom: 0; width: 4000px; height: 8px"></div>
 <div class="rail wv" style="right: 0; top: 100%; width: 8px; height: 112px"></div>
 <div class="bar wh" style="left: 0; right: 0; top: 0; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; bottom: 0; height: 8px"></div>
 <div class="bar wv" style="left: 0; top: 0; bottom: 0; width: 8px"></div>
 <div class="bar wv" style="right: 0; top: 0; bottom: 0; width: 8px"></div>
-<div class="photo" style="aspect-ratio: 4 / 3; background: #f4f6f9"><img src="assets/0e540b3fc794.png" alt="Computational Social Cognition Lab logo: two nested head silhouettes in soft blue line art" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain"></div>
-</div>
+<div class="photo" style="aspect-ratio: 4 / 3; background: #f4f6f9"><img src="assets/0e540b3fc794.png" alt="Computational Social Cognition Lab logo: two nested head silhouettes in soft blue line art" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain"><div class="hov" aria-hidden="true"><div class="mq"><span>COMPUTATIONAL SOCIAL COGNITION LAB ↗ · COMPUTATIONAL SOCIAL COGNITION LAB ↗ · </span><span>COMPUTATIONAL SOCIAL COGNITION LAB ↗ · COMPUTATIONAL SOCIAL COGNITION LAB ↗ · </span></div></div></div>
+</a>
 <div class="ink rv" style="grid-column: 8 / span 5; grid-row: 1; align-self: center; display: flex; flex-direction: column; gap: 14px; max-width: 480px">
 <div style="font-size: 13px; letter-spacing: 0.24em">SEP 2026 – PRESENT · RESEARCH ASSISTANT</div>
 <h2 style="margin: 0 0 6px; font-size: 26px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.3; width: 567px">Yale University<br>Computational Social Cognition Lab</h2>
@@ -107,15 +151,15 @@ a{color:#22140a}a:hover{color:#6e3f18}
 
 <ul style="margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.65"><li>Support child development studies through family recruitment and participant coordination</li><li>Frequently conduct data analysis for PhD students in the lab</li></ul>
 </div>
-<div class="frame rv" style="grid-column: 6 / span 7; grid-row: 2">
+<a href="https://zemi.charlesmcclean.com/" target="_blank" rel="noopener noreferrer" class="frame rv lab" aria-label="Visit the Japanese Politics Lab website (opens in a new tab)" style="grid-column: 6 / span 7; grid-row: 2">
 <div class="rail wh" style="left: 100%; top: 0; width: 4000px; height: 8px"></div>
 <div class="rail wv" style="left: 0; top: 100%; width: 8px; height: 112px"></div>
 <div class="bar wh" style="left: 0; right: 0; top: 0; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; bottom: 0; height: 8px"></div>
 <div class="bar wv" style="left: 0; top: 0; bottom: 0; width: 8px"></div>
 <div class="bar wv" style="right: 0; top: 0; bottom: 0; width: 8px"></div>
-<div class="photo" style="aspect-ratio: 874 / 866; background: #8f7f44"><img src="assets/a4fc8825633f.png" alt="Collage of a pink circle with a dark red offset shadow on an olive halftone background, evoking the Japanese flag" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div>
-</div>
+<div class="photo" style="aspect-ratio: 874 / 866; background: #8f7f44"><img src="assets/a4fc8825633f.png" alt="Collage of a pink circle with a dark red offset shadow on an olive halftone background, evoking the Japanese flag" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"><div class="hov" aria-hidden="true"><div class="mq"><span>JAPANESE POLITICS LAB ↗ · JAPANESE POLITICS LAB ↗ · </span><span>JAPANESE POLITICS LAB ↗ · JAPANESE POLITICS LAB ↗ · </span></div></div></div>
+</a>
 <div class="ink rv" style="grid-column: 1 / span 5; grid-row: 2; align-self: center; display: flex; flex-direction: column; gap: 14px; max-width: 480px">
 <div style="font-size: 13px; letter-spacing: 0.24em">NOV 2025 – PRESENT · RESEARCH ASSISTANT</div>
 <h2 style="margin: 0 0 6px; font-size: 26px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.3">Yale University <br>Japanese Politics Lab</h2>
@@ -123,15 +167,15 @@ a{color:#22140a}a:hover{color:#6e3f18}
 
 <ul style="margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.65"><li>Research and collect data on topics concerning Japanese politics</li><li>Advanced data analysis in R to identify trends in Japanese political relations, analyzing factors such as gender, youth and public opinion</li></ul>
 </div>
-<div class="frame rv" style="grid-column: 1 / span 7; grid-row: 3">
+<a href="https://www.jax.org/research-and-faculty/research-labs/the-nishina-lab" target="_blank" rel="noopener noreferrer" class="frame rv lab" aria-label="Visit the Nishina Lab website (opens in a new tab)" style="grid-column: 1 / span 7; grid-row: 3">
 <div class="rail wh" style="right: 100%; bottom: 0; width: 4000px; height: 8px"></div>
 <div class="rail wv" style="right: 0; top: 100%; width: 8px; height: 112px"></div>
 <div class="bar wh" style="left: 0; right: 0; top: 0; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; bottom: 0; height: 8px"></div>
 <div class="bar wv" style="left: 0; top: 0; bottom: 0; width: 8px"></div>
 <div class="bar wv" style="right: 0; top: 0; bottom: 0; width: 8px"></div>
-<div class="photo" style="aspect-ratio: 1680 / 1337; background: #120a14"><img src="assets/309c7415963a.jpg" alt="Fluorescence microscopy image of a cluster of cells stained red, magenta, blue and green" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div>
-</div>
+<div class="photo" style="aspect-ratio: 1680 / 1337; background: #120a14"><img src="assets/309c7415963a.jpg" alt="Fluorescence microscopy image of a cluster of cells stained red, magenta, blue and green" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"><div class="hov" aria-hidden="true"><div class="mq"><span>NISHINA LAB ↗ · NISHINA LAB ↗ · </span><span>NISHINA LAB ↗ · NISHINA LAB ↗ · </span></div></div></div>
+</a>
 <div class="ink rv" style="grid-column: 8 / span 5; grid-row: 3; align-self: center; display: flex; flex-direction: column; gap: 14px; max-width: 480px">
 <div style="font-size: 13px; letter-spacing: 0.24em">NOV 2024 – MAY 2025 · RESEARCH INTERN</div>
 <h2 style="margin: 0 0 6px; font-size: 26px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.3">The Jackson Laboratory Ocular Research</h2>
@@ -139,15 +183,15 @@ a{color:#22140a}a:hover{color:#6e3f18}
 
 <ul style="margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.65"><li>Tested and developed a genetic eye model for age-related wet macular degeneration</li><li>Ran wet-lab workflows including retinal flat mount dissections, fluorescent staining, cryosectioning, western blot tests, isoflurane procedure and fluorescence microscopy</li><li>Maintained detailed lab notebooks and sample-tracking spreadsheets; followed SOPs and safety protocols to ensure clean, reproducible data</li></ul>
 </div>
-<div class="frame rv" style="grid-column: 6 / span 7; grid-row: 4">
+<a href="https://mdibl.org/faculty/jane-e-disney-ph-d/" target="_blank" rel="noopener noreferrer" class="frame rv lab" aria-label="Visit the MDI Biological Laboratory, Disney Lab website (opens in a new tab)" style="grid-column: 6 / span 7; grid-row: 4">
 <div class="rail wh" style="left: 100%; top: 0; width: 4000px; height: 8px"></div>
 <div class="rail wv" style="left: 0; top: 100%; width: 8px; height: 112px"></div>
 <div class="bar wh" style="left: 0; right: 0; top: 0; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; bottom: 0; height: 8px"></div>
 <div class="bar wv" style="left: 0; top: 0; bottom: 0; width: 8px"></div>
 <div class="bar wv" style="right: 0; top: 0; bottom: 0; width: 8px"></div>
-<div class="photo" style="aspect-ratio: 712 / 616; background: #0d1626"><img src="assets/88bed6536cb7.jpg" alt="Microscope view of marine phytoplankton: diatoms, dinoflagellates and filaments against a dark background" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div>
-</div>
+<div class="photo" style="aspect-ratio: 712 / 616; background: #0d1626"><img src="assets/88bed6536cb7.jpg" alt="Microscope view of marine phytoplankton: diatoms, dinoflagellates and filaments against a dark background" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"><div class="hov" aria-hidden="true"><div class="mq"><span>MDI BIOLOGICAL LABORATORY ↗ · MDI BIOLOGICAL LABORATORY ↗ · </span><span>MDI BIOLOGICAL LABORATORY ↗ · MDI BIOLOGICAL LABORATORY ↗ · </span></div></div></div>
+</a>
 <div class="ink rv" style="grid-column: 1 / span 5; grid-row: 4; align-self: center; display: flex; flex-direction: column; gap: 14px; max-width: 480px">
 <div style="font-size: 13px; letter-spacing: 0.24em">JUN 2024 – AUG 2024 · RESEARCH INTERN</div>
 <h2 style="margin: 0 0 6px; font-size: 26px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.3">Mount Desert Island Bio Lab<br>Public Health</h2>
@@ -156,14 +200,14 @@ a{color:#22140a}a:hover{color:#6e3f18}
 <ul style="margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.65"><li>Public health science project on toxic phytoplankton levels in local oceans: analyzed ~26,000 phytoplankton observations in R to identify temporal trends in toxic species over a 20-year period</li><li>Analyzed longitudinal phytoplankton datasets in R to identify temporal and species-specific trends; produced statistical analyses and data visualizations</li></ul>
 <a href="assets/ac9d13c7dd23.pdf" target="_blank" rel="noopener" style="align-self: flex-start; margin-top: 10px; font-size: 16px; letter-spacing: 0.12em; text-decoration: none; border: 1px solid rgba(34,20,10,0.45); padding: 10px 18px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">See poster ↗</a>
 </div>
-<div class="frame rv" style="grid-column: 1 / span 7; grid-row: 5">
+<a href="https://www.jax.org/research-and-faculty/faculty/laura-reinholdt" target="_blank" rel="noopener noreferrer" class="frame rv lab" aria-label="Visit the Reinholdt Lab website (opens in a new tab)" style="grid-column: 1 / span 7; grid-row: 5">
 <div class="rail wh" style="right: 100%; bottom: 0; width: 4000px; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; top: 0; height: 8px"></div>
 <div class="bar wh" style="left: 0; right: 0; bottom: 0; height: 8px"></div>
 <div class="bar wv" style="left: 0; top: 0; bottom: 0; width: 8px"></div>
 <div class="bar wv" style="right: 0; top: 0; bottom: 0; width: 8px"></div>
-<div class="photo" style="aspect-ratio: 474 / 438; background: #0b1a33"><img src="assets/438fc942c2f1.jpg" alt="Illustration of a blue DNA double helix against a dark starry background" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div>
-</div>
+<div class="photo" style="aspect-ratio: 474 / 438; background: #0b1a33"><img src="assets/438fc942c2f1.jpg" alt="Illustration of a blue DNA double helix against a dark starry background" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"><div class="hov" aria-hidden="true"><div class="mq"><span>REINHOLDT LAB ↗ · REINHOLDT LAB ↗ · </span><span>REINHOLDT LAB ↗ · REINHOLDT LAB ↗ · </span></div></div></div>
+</a>
 <div class="ink rv" style="grid-column: 8 / span 5; grid-row: 5; align-self: center; display: flex; flex-direction: column; gap: 14px; max-width: 480px">
 <div style="font-size: 13px; letter-spacing: 0.24em">NOV 2023 – MAY 2024 · RESEARCH INTERN</div>
 <h2 style="margin: 0 0 6px; font-size: 26px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.3">The Jackson Laboratory Genomics Research</h2>
